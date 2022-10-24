@@ -113,4 +113,35 @@ public class HomeControllerTests
         Assert.True(result[0].Name == "P2" && result[0].Category == "Cat2");
         Assert.True(result[1].Name == "P4" && result[1].Category == "Cat2");
     }
+
+    [Fact]
+    public void Generate_Category_Specific_Product_Count()
+    {
+        // arrange
+        var mock = new Mock<IStoreRepository>();
+        var products = new Product[] {
+            new Product{Id = 1, Name = "P1", Category = "Cat1"},
+            new Product{Id = 2, Name = "P2", Category = "Cat1"},
+            new Product{Id = 3, Name = "P3", Category = "Cat3"},
+            new Product{Id = 4, Name = "P4", Category = "Cat1"},
+            new Product{Id = 5, Name = "P5", Category = "Cat2"},
+        };
+        mock.Setup(m => m.Products).Returns(products.AsQueryable<Product>());
+        var target = new HomeController(mock.Object);
+        target.PageSize = 3;
+
+        Func<ViewResult, ProductListViewModel?> GetModel = result =>
+            result?.ViewData?.Model as ProductListViewModel;
+
+        // Action
+        int? res1 = GetModel(target.Index("Cat1"))?.PagingInfo.TotalItems;
+        int? res2 = GetModel(target.Index("Cat2"))?.PagingInfo.TotalItems;
+        int? res3 = GetModel(target.Index("Cat3"))?.PagingInfo.TotalItems;
+        int? resAll = GetModel(target.Index(null))?.PagingInfo.TotalItems;
+        // Assert
+        Assert.Equal(3, res1);
+        Assert.Equal(1, res2);
+        Assert.Equal(1, res3);
+        Assert.Equal(5, resAll);
+    }
 }
