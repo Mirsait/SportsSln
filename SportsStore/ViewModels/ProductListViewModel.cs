@@ -8,4 +8,6 @@ public class ProductListViewModel
 
     public PagingInfo PagingInfo { get; set; } = new();
 
+    public string? CurrentCategory { get; set; }
+
 }
