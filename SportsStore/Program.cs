@@ -12,6 +12,8 @@ builder.Services.AddDbContext<StoreDbContext>(opts =>
 
 builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
 
+builder.Services.AddRazorPages();
+
 var app = builder.Build();
 
 app.UseStaticFiles();
@@ -33,6 +35,7 @@ app.MapControllerRoute(
     "Products/Page{productPage}",
     new { Controller = "Home", action = "Index", productPage = 1 });
 app.MapDefaultControllerRoute();
+app.MapRazorPages();
 
 SeedData.EnsurePopulated(app);
 
