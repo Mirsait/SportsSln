@@ -13,10 +13,10 @@ public class NavigationMenuViewComponentTests
     {
         var mock = new Mock<IStoreRepository>();
         var products = new Product[] {
-            new Product{Id = 1, Name = "P1", Category = "Cat1"},
-            new Product{Id = 2, Name = "P2", Category = "Cat2"},
-            new Product{Id = 3, Name = "P3", Category = "Cat3"},
-            new Product{Id = 4, Name = "P4", Category = "Cat3"},
+            new Product{ProductID = 1, Name = "P1", Category = "Cat1"},
+            new Product{ProductID = 2, Name = "P2", Category = "Cat2"},
+            new Product{ProductID = 3, Name = "P3", Category = "Cat3"},
+            new Product{ProductID = 4, Name = "P4", Category = "Cat3"},
         };
         mock.Setup(m => m.Products).Returns(products.AsQueryable<Product>());
 
@@ -37,8 +37,8 @@ public class NavigationMenuViewComponentTests
         string categoryToSelect = "Sky-Watcher";
         var mock = new Mock<IStoreRepository>();
         var products = new Product[] {
-            new Product{Id = 1, Name = "P1", Category = "Meade"},
-            new Product{Id = 2, Name = "P2", Category = "Sky-Watcher"},
+            new Product{ProductID = 1, Name = "P1", Category = "Meade"},
+            new Product{ProductID = 2, Name = "P2", Category = "Sky-Watcher"},
         };
         mock.Setup(m => m.Products).Returns(products.AsQueryable<Product>());
 

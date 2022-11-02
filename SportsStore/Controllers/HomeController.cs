@@ -19,7 +19,7 @@ namespace SportsStore.Controllers
             {
                 Products = _repository.Products
                     .Where(p => category == null || p.Category == category)
-                    .OrderBy(p => p.Id)
+                    .OrderBy(p => p.ProductID)
                     .Skip((productPage - 1) * PageSize)
                     .Take(PageSize),
                 PagingInfo = new PagingInfo
