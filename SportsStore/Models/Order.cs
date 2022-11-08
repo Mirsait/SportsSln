@@ -34,4 +34,7 @@ public class Order
 
     public bool GiftWrap { get; set; }
 
+    [BindNever]
+    public bool Shipped { get; set; }
+
 }
