@@ -1,9 +1,5 @@
 @model ProductListViewModel
 
-@{
-    Layout = "../Shared/_Layout.cshtml";
-}
-
 @foreach (var item in Model?.Products ?? Enumerable.Empty<Product>())
 {
     <partial name="ProductSummary" model="item" />
